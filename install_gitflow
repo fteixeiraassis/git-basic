@@ -1,0 +1,36 @@
+#para debian
+sudo apt install git-flow
+
+#verificar a versão
+git flow version
+
+#entre no diretorio do repositorio e inicie o flow
+git flow init
+
+#na parte da tag
+v
+
+#quando for aplicar alguma feature
+git flow feature start nova-branch
+#faça as alterações
+
+#para finalizar a feature
+git flow feature finish nova-branch
+
+#publicar as alterações
+git flow feature publish nova-branch
+
+#obter nova funcionalidade
+git flow feature pull nova-branch
+
+#iniciar e nova versão
+git flow release start nova-branch
+
+#finalizar a nova versão
+git flow release finish nova-branch
+
+#corrigir erro em produção
+git flow hostfix start nova-branch
+
+#corrigir erro em produção
+git flow hostfix finish nova-branch

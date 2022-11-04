@@ -1,0 +1,173 @@
+#aula https://www.youtube.com/watch?v=uh4oANEA-lo&t=6880s
+
+#verificar versão do git
+git --version
+
+#para configurações gerais
+git config --global user.name "nome_do_seu usuário"
+git config --global user.email "seu-email@.com"
+git config -l
+
+#para verificar seu usuário
+git config user.name
+
+#----------------------------------------------------------
+#criar um repositório git
+git init nome_do_seu_repositorio
+
+#----------------------------------------------------------
+#verificar configurações do seu repositorio
+git status
+git status -s
+
+#----------------------------------------------------------
+#para adicionar um arquivo para ser monitorado pelo git
+git add nomedoarquivo
+
+#adicionar apenas arquivos monitorados
+git add -u
+
+#adicionar os arquivos da pasta atual
+git add .
+
+#adicionar os arquivos da pasta atual
+git add -A
+#----------------------------------------------------------
+
+#para abrir os arquivos de configuração do commit
+git commit
+
+#atualizar arquivo adicionado/modificado
+#-a adicionar
+#-m insere mensagem
+git commit -a -m "informações sobre o arquivo"
+
+#renomear o último commit
+git commit --amend -m "informações sobre o arquivo"
+
+#----------------------------------------------------------
+#verificar diferenças nos arquivos
+git diff nomedoarquivo
+
+#----------------------------------------------------------
+#verificar logs
+git log
+git log --oneline
+
+#melhorar saída do git log
+# -%h hash do commit
+#-an nome e sobrenome do autor
+git log --pretty=format:"%h | %an: %s"
+#Ex: 78d7505 | fteixeiraassis: nomedocommit
+
+git log --pretty=format:"%h | %an - %ar: %s"
+#Ex: 78d7505 | fteixeiraassis - 2 weeks ago: nomedocommit
+
+#para saber commits em determinado tempo
+git log --oneline --since=10.minutes
+
+#para saber o ultimo commit
+git log --oneline -1
+
+#exibir log com grafico
+git log --oneline --graph
+
+#todo historico modificações que foram feitas
+git reflog
+
+#----------------------------------------------------------
+
+#ignorar arquivos para não ser enviado
+#adicionae as extensões dentro do arquivo .gitignore
+
+#remover arquivo do cache
+git rm --cached nomedoarquivo
+
+#passar a utilizar o arquivo cuja extensão esta dentro do .gitignore
+git check-ignore -v nomedoarquivo_ou_extensão
+
+#desfazer erros
+git restore nomedoarquivo
+
+#----------------------------------------------------------
+
+#para voltar o arquivo para um commit especifico
+git checkout hash_do_commit
+#para voltar ao estado anterior
+git checkout master(nome_da_branch)
+
+#----------------------------------------------------------
+#voltar a um commit descartando os que estão a frente deste
+#mantem a stage área
+git reset --soft
+#mantem a stage área
+git reset --mixed
+#não mmantem nada APÓS o 2 commit
+git reset HEAD-2 --hard
+
+#----------------------------------------------------------
+#voltar arquivos atuais criando um commit
+git revert -m "Reverter" HEAD
+
+#criar outra branch para trabalhar
+git branch outra_branch
+
+#remover uma branch 
+git branch -d outra_branch
+
+#trocar e #riar outra branch para trabalhar
+git switch -c outra_branch
+
+#fazer um merge entre a branch criada e outra
+#1º retorne para a branch que deseje fazer o merge
+git branch master
+#2º realize o merge
+git merge outra_branch
+
+#criar uma linha reta entre as branchs
+git rebase outra_branch
+#se houver algum problema edite o(s) arquivo(s) e depois:
+git rebase --continue
+
+#criar tag
+git tag 1(nova_versão).0(nova_funcionalidade).0(correção_bug)
+#remover tag
+git tag -d 1.0.0
+
+#utilizar arquivos entre branchs
+git stash
+git stash list #lista os arquivos
+git stash pop #aplica o arquivo
+git stash -p #alterar somente uma linha especifica
+git stash clear #remover o stash
+
+#criar repositorio para uso remoto
+mkdir nome_do_seu_repositorio
+git init --bare nome_do_seu_repositorio.git
+
+#enviar arquivos para o repositorio
+git remote add origin ssh://user@host:1234/srv/git/example #(poderia_ser_um_servidor_com_seus_repositorio)
+git remote add local nome_do_seu_repositorio.git
+git remote show
+git push local master
+
+git push origin --all
+
+#clonar repo local
+git clone nome_do_seu_repositorio.git newrepo
+
+#enviar o codigo automaticamente
+cd repo
+CTRL+x
+cat > ,,/repo.gti/hooks/post-receive << EOF
+#!/bin/sh
+git --work-tree=/var/www/html checkout -f
+EOF
+chmod +x post-receive
+
+#para alterar o nome do arquivo
+git mv nomedoarquivo
+
+
+
+
